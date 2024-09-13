@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASL Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>American Sign Language Recognition</h1>
+            <p>Explore and learn ASL signs with our interactive recognition tool.</p>
+        </div>
+    </header>
+
+    <div class="container-wrapper">
+        <div class="info-container">
+            <div class="info-section">
+                <p>The American Sign Language (ASL) is the primary language used by deaf individuals in North America. It is a visual language that uses a combination of hand gestures, facial expressions, and body movements to convey meaning.</p>
+            </div class="image-section" >
+            <p> Take a look at American Sign Language through the picture below, it contains the alphabets from A-Z, and additionally 3 symbols for space, del, nothing in which J, Z are movements</p>
+            <img src="https://www.dictionary.com/e/wp-content/uploads/2018/01/american_sign_language4-790x310.jpg" alt="ASL image">
+        </div>
+        
+        <div class="predict-container">
+            <h3>Getting confused with the ASL 😵‍💫, Use our Deep learning tool to easily predict the ASL sign</h3>
+            <button type="button" id="predict-something-button" onclick="showUploadOptions()">Want to predict something?</button>
+
+            <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+                <div id="upload-options" style="display: none;">
+                    <button type="button" id="video-button" onclick="document.getElementById('video-input').click();">Single Video</button>
+                    <input type="file" name="video" id="video-input" accept="video/*" style="display: none;" onchange="previewVideo(this)">
+                    <button type="button" id="files-button" onclick="document.getElementById('files-input').click();">Series of Images</button>
+                    <input type="file" name="files[]" id="files-input" accept="image/*" multiple style="display: none;" onchange="previewImages(this)">
+                </div>
+            </form>
+            <!--<video id="video-player" style="display:none;"></video>-->
+            <!-- Display Images Side by Side -->
+            <div id="image-preview" class="flex-container"></div>
+
+            <!-- Predict Button -->
+            <button type="button" id="predict-button" onclick="predict(event)">Predict</button>
+
+            <div id="result"> </div>
+        </div>
+    </div>
+
+
+    
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+    
+    <input type="file" name="file" id="file-input" accept="image/*" capture="camera" onchange="previewImage(this, 300)">
+</body>
+
+</html>
